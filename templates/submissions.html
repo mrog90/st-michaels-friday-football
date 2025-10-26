@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submissions</title>
+  <style>
+    body { background:#111; color:#fff; font-family:Arial, sans-serif; text-align:center; }
+    table { margin:auto; border-collapse:collapse; margin-top:30px; width:80%; }
+    th, td { border:1px solid #555; padding:10px; }
+    th { background:#222; }
+  </style>
+</head>
+<body>
+  <h1>All Submissions</h1>
+  <table>
+    <tr><th>ID</th><th>Name</th><th>Goals</th><th>Assists</th><th>Date</th></tr>
+    {% for row in data %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

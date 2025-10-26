@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>St Michaels Friday Night Football</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+<img src="{{ url_for('static', filename='logo.png') }}" alt="St Michaels Logo" class="logo">
+
+    <h1>⚽ St Michaels Friday Night Football</h1>
+    <p>Submit your goals and assists below</p>
+
+    <form id="goalForm" autocomplete="off">
+      <label for="name">Player Name</label>
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+      <label for="goals">Goals Scored</label>
+      <input type="number" id="goals" name="goals" min="0" required>
+
+      <label for="assists">Assists Made</label>
+      <input type="number" id="assists" name="assists" min="0" required>
+
+      <label for="match_date">Match Date</label>
+      <select id="match_date" name="match_date" required>
+        <option value="" disabled selected>Select Match Date</option>
+        {% for date in fridays %}
+          <option value="{{ date }}">{{ date }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="toast">✅ Submission received!</div>
+  </main>
+
+<script>
+document.getElementById("goalForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const payload = {
+    name: document.getElementById("name").value,
+    goals: document.getElementById("goals").value,
+    assists: document.getElementById("assists").value,
+    match_date: document.getElementById("match_date").value
+  };
+
+  const response = await fetch("/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const result = await response.json();
+
+  if (result.success) {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+    this.reset();
+    document.getElementById("match_date").selectedIndex = 0;
+  } else {
+    alert("❌ Error: " + (result.error || "Failed to submit"));
+  }
+});
+</script>
+
+</body>
+</html>
