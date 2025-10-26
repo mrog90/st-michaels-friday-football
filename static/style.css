@@ -128,3 +128,18 @@ button:hover, button:active {
   border-radius: 50%; /* optional circular logo look */
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
+
+.download-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: gold;
+  color: black;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.download-btn:hover {
+  background: #f1c40f;
+}

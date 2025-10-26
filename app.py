@@ -57,3 +57,19 @@ if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
+from flask import send_file
+
+# 🔒 Replace this with your private key (choose anything unique)
+ADMIN_KEY = "olly"
+
+@app.route("/download")
+def download_csv():
+    key = request.args.get("key")
+    if key != ADMIN_KEY:
+        return "Unauthorized", 403
+
+    if not os.path.exists(CSV_FILE):
+        return "No submissions yet", 404
+
+    return send_file(CSV_FILE, as_attachment=True)
