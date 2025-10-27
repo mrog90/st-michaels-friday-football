@@ -11,21 +11,32 @@
   </style>
 </head>
 <body>
-  <h1>All Submissions</h1>
-  <table>
-    <tr><th>ID</th><th>Name</th><th>Goals</th><th>Assists</th><th>Date</th></tr>
+<h1>All Submissions</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Goals</th>
+      <th>Assists</th>
+      <th>Match Date</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for row in data %}
       <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-        <td>{{ row[4] }}</td>
+        <td>{{ row[0] }}</td>  <!-- Name -->
+        <td>{{ row[1] }}</td>  <!-- Goals -->
+        <td>{{ row[2] }}</td>  <!-- Assists -->
+        <td>{{ row[3] }}</td>  <!-- Match Date -->
+        <td>{{ row[4] }}</td>  <!-- Timestamp -->
       </tr>
     {% endfor %}
-  </table>
+  </tbody>
+</table>
 
-  <a href="/download?key=olly" class="download-btn">⬇️ Download CSV</a>
+<a href="/download?key=olly" class="download-btn">⬇️ Download CSV</a>
+
 
 </body>
 </html>
